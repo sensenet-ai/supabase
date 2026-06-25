@@ -19,6 +19,7 @@ export function constructHeaders(headers: { [prop: string]: any }) {
       cookie: headers.cookie,
       'Content-Type': headers['Content-Type'],
       'x-connection-encrypted': headers['x-connection-encrypted'],
+      'X-PG-Meta-Db': headers['X-PG-Meta-Db'] ?? headers['x-pg-meta-db'],
     } as any
     // clean up key with underfined value
     Object.keys(cleansedHeaders).forEach((key) =>
@@ -27,7 +28,7 @@ export function constructHeaders(headers: { [prop: string]: any }) {
 
     // extract pg_meta_db cookie and forward as X-PG-Meta-Db header
     // (self-hosted multi-db: postgres-meta uses this to switch databases)
-    if (headers.cookie) {
+    if (!cleansedHeaders['X-PG-Meta-Db'] && headers.cookie) {
       const match = headers.cookie.match(/pg_meta_db=([^;]+)/)
       if (match) {
         cleansedHeaders['X-PG-Meta-Db'] = decodeURIComponent(match[1])
