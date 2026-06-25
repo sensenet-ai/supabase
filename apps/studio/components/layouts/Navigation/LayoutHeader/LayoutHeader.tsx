@@ -22,6 +22,7 @@ import { AssistantButton } from '@/components/layouts/AppLayout/AssistantButton'
 import { BranchDropdown } from '@/components/layouts/AppLayout/BranchDropdown'
 import { InlineEditorButton } from '@/components/layouts/AppLayout/InlineEditorButton'
 import { OrganizationDropdown } from '@/components/layouts/AppLayout/OrganizationDropdown'
+import { DatabaseDropdown } from '@/components/layouts/AppLayout/DatabaseDropdown'
 import { ProjectDropdown } from '@/components/layouts/AppLayout/ProjectDropdown'
 import { HelpButton } from '@/components/ui/HelpPanel/HelpButton'
 import { getResourcesExceededLimitsOrg } from '@/components/ui/OveragesBanner/OveragesBanner.utils'
@@ -162,6 +163,9 @@ export const LayoutHeader = ({
                     {IS_PLATFORM && <LayoutHeaderDivider />}
 
                     <ProjectDropdown />
+
+                    <LayoutHeaderDivider />
+                    <DatabaseDropdown />
 
                     {exceedingLimits && (
                       <div className="ml-2">
