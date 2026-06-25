@@ -53,11 +53,10 @@ export const DatabaseDropdown = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          type="text"
-          size="tiny"
-          className="inline-flex items-center gap-1.5 font-mono text-xs text-foreground-light hover:text-foreground"
+          variant="default"
+          className="rounded-full"
+          icon={<Database className="rotate-0" size={14} strokeWidth={1.5} />}
         >
-          <Database size={14} strokeWidth={1.5} className="shrink-0" />
           <span>{current}</span>
         </Button>
       </DropdownMenuTrigger>
