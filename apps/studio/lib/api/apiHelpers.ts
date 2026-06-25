@@ -24,6 +24,16 @@ export function constructHeaders(headers: { [prop: string]: any }) {
     Object.keys(cleansedHeaders).forEach((key) =>
       cleansedHeaders[key] === undefined ? delete cleansedHeaders[key] : {}
     )
+
+    // extract pg_meta_db cookie and forward as X-PG-Meta-Db header
+    // (self-hosted multi-db: postgres-meta uses this to switch databases)
+    if (headers.cookie) {
+      const match = headers.cookie.match(/pg_meta_db=([^;]+)/)
+      if (match) {
+        cleansedHeaders['X-PG-Meta-Db'] = decodeURIComponent(match[1])
+      }
+    }
+
     return {
       ...cleansedHeaders,
       // [Joshen] JFYI both Alaister and I checked on this and realised this might not be used actually
